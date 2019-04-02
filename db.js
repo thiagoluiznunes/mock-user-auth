@@ -26,7 +26,7 @@ async function isAuthenticated(email, password) {
   return { data: id };
 }
 
-async function createUser(name, email, password, imageUrl) {
+async function postUser(name, email, password, imageUrl) {
   let res = true;
   let id = undefined;
   await userdb.users.findIndex(user => {
@@ -48,7 +48,6 @@ async function createUser(name, email, password, imageUrl) {
   return { data: id };
 }
 
-// async function getUser(email, password) {
 async function getUser(token) {
   let profile
   const decode = jwt.verify(token, SECRET_KEY);
@@ -61,15 +60,10 @@ async function getUser(token) {
   return { data: profile };
 }
 
-async function getUserLicense(id) {
-  return userdb.users.find(user => user.id === id ? user : null);
-}
-
 module.exports = {
   createToken,
   verifyToken,
   isAuthenticated,
-  createUser,
-  getUser,
-  getUserLicense
+  postUser,
+  getUser
 }

@@ -4,11 +4,6 @@ const db = require('./db');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-// router.post('/auth/validateToken', (req, res) => {
-//   const token = req.body.token || '';
-//   jwt.verify(token, SECRET_KEY, err => err ? res.status(400).send({ valid: !err }) : res.status(200).send({ valid: !err }));
-// });
-
 router.post('/auth', (req, res) => {
   const { email, password } = req.body;
   db.isAuthenticated(email, password).then(response => {
