@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": 94870,
+      "name": "Thiago",
+      "email": "nunes@gmail.com",
+      "password": "123456",
+      "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
+    }
+  ]
+}
