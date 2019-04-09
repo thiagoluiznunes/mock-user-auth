@@ -1,5 +1,5 @@
-const express = require('express');
-const ctrl = require('./mock.controller');
+import express from 'express';
+import ctrl from './mock.controller';
 const router = express.Router();
 
 router.post('/auth', (req, res) => {
@@ -40,4 +40,4 @@ router.get('/users', (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;

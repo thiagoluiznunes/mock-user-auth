@@ -1,6 +1,6 @@
-const fs = require('fs');
-const faker = require('faker');
-const jwt = require('jsonwebtoken');
+import fs from 'fs';
+import faker from 'faker';
+import jwt from 'jsonwebtoken';
 
 const SECRET_KEY = '123456789';
 const expiresIn = '24h';
@@ -70,7 +70,7 @@ async function getUser(token) {
   return { data: data, status: status };
 }
 
-module.exports = {
+export default {
   createToken,
   verifyToken,
   isAuthenticated,

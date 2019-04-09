@@ -1,10 +1,9 @@
-const createError = require('http-errors');
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const cors = require('./config/cors');
-
-const mock = require('./components/mock/mock');
+import createError from 'http-errors';
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+import cors from './config/cors';
+import mock from './components/mock/mock';
 
 const app = express();
 
@@ -32,4 +31,4 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-module.exports = app;
+export default app;

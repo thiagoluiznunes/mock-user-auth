@@ -1,7 +1,7 @@
-const api = require('./mock.api');
-const controller = require('./mock.controller');
+import api from './mock.api';
+import controller from './mock.controller';
 
-module.exports = {
+export default {
   api,
   controller
 }
