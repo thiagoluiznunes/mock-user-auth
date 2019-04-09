@@ -32,7 +32,8 @@ router.get('/users', (req, res) => {
   const token = req.body.token || req.query.token || req.headers[authorization];
   ctrl.getUser(token)
     .then(response => {
-      if (!response.data) return res.status(403).json( {message: 'Token invalid!' });
+      console.log('Response: ', response);
+      if (!response.status) return res.status(401).json({ message: response.data });
       res.status(200).json({ message: 'Get user authorized', data: response.data });
     })
     .catch(err => {
