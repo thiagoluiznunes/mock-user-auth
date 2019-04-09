@@ -49,16 +49,19 @@ async function postUser(name, email, password, imageUrl) {
 }
 
 async function getUser(token) {
-  let data, status;
-  const decode = await jwt.verify(token, SECRET_KEY, (err, decode) => {
+  let data, res_decode, status;
+  await jwt.verify(token, SECRET_KEY, (err, decode) => {
     if (err) {
       data = err.message;
       status = false;
+    } else {
+      res_decode = decode;
+      status = true;
     }
   });
   if (status) {
     await userdb.users.findIndex(user => {
-      if (user.email === decode.email && user.id === decode.id) {
+      if (user.email === res_decode.email && user.id === res_decode.id) {
         data = user;
         status = true;
       }

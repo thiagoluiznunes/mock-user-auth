@@ -5,8 +5,8 @@ const router = express.Router();
 router.post('/auth', (req, res) => {
   const { email, password } = req.body;
   ctrl.isAuthenticated(email, password).then(response => {
-    if (!response) res.status(401).json({ message : 'Incorrect email or password'});
-    const id = response;
+    if (!response.data) res.status(401).json({ message : 'Incorrect email or password'});
+    const id = response.data;
     const access_token = ctrl.createToken({ email, id });
     res.status(200).json({ token: access_token });
   });
@@ -32,7 +32,6 @@ router.get('/users', (req, res) => {
   const token = req.body.token || req.query.token || req.headers[authorization];
   ctrl.getUser(token)
     .then(response => {
-      console.log('Response: ', response);
       if (!response.status) return res.status(401).json({ message: response.data });
       res.status(200).json({ message: 'Get user authorized', data: response.data });
     })
