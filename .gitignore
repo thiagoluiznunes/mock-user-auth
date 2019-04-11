@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/.nyc_output
 /json-server-api/users.json
 
 # dependencies

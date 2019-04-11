@@ -1,6 +1,5 @@
 import chai from 'chai';
 import mock from './mock';
-import express from 'express';
 
 const assert = chai.assert;
 
