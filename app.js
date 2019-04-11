@@ -1,6 +1,6 @@
 import createError from 'http-errors';
 import express from 'express';
-import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 import logger from 'morgan';
 import cors from './config/cors';
 import mock from './components/mock/mock';
@@ -10,8 +10,8 @@ const app = express();
 app.use(logger('dev'));
 app.use(cors);
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use('/api/v1', mock.api);
 
@@ -30,5 +30,9 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error');
 });
+
+if (process.env.NODE_ENV === 'test') {
+  app.listen(3000);
+}
 
 export default app;
