@@ -2,11 +2,11 @@ process.env.NODE_ENV = 'test';
 
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import request from 'request';
 import mock from './mock';
+import server from '../../bin/www';
 
 const assert = chai.assert;
-const should = chai.should;
+const expect = chai.expect;
 
 describe('Module mock' , () => {
   it('It should be a module', () => {
@@ -23,24 +23,23 @@ describe('Module mock' , () => {
 });
 
 chai.use(chaiHttp);
-const url = 'http://localhost:3000/api/v1'
 
 describe('Mock Api' , () => {
   describe('/POST User', () => {
-    it('It should create a new user', () => {
+    it('It should create a new user', async () => {
       let user = {
         name: 'User test',
         email: 'user@test.com',
-        passowrd: 'user123',
-        imageUrl: 'https://'
+        password: 'user123'
       }
-      request.post({
-          headers: {'content-type' : 'application/json'},
-          url: `${url}/users`,
-          body: JSON.stringify(user)
-        }, (err, res, body) => {
-          console.log(body);
-        });
+      chai.request(server)
+      .post('/api/v1/users')
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.an('Object')
+        expect(res.body.message).to.equal('User registered with success');
+      });
     });
   });
 });
