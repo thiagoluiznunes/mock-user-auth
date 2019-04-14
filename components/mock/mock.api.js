@@ -34,6 +34,7 @@ router.post('/users', (req, res) => {
 router.get('/users', (req, res) => {
   const authorization = 'authorization';
   const token = req.body.token || req.query.token || req.headers[authorization];
+  console.log(token)
   ctrl.getUser(token)
     .then(response => {
       if (!response.status) return res.status(401).json({ message: response.data });

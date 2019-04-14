@@ -13,6 +13,7 @@ const user = {
   email: 'user@test.com',
   password: 'user123'
 }
+let token = null;
 
 describe('Module mock' , () => {
   it('It should be a module', () => {
@@ -56,7 +57,21 @@ describe('Mock Api' , () => {
         expect(res.status).to.equal(200);
         expect(res.body).to.be.an('Object');
         expect(res.body.token).to.be.not.empty;
-      })
+        token = res.body.token;
+      });
+    });
+  });
+
+  describe('/GET User', () => {
+    it('It should get a user by token', async () => {
+      chai.request(server)
+      .get('/api/v1/users')
+      .set('Authorization', token)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.an('Object');
+        expect(res.body.data).to.be.not.empty;
+      });
     });
   });
 });
