@@ -40,4 +40,12 @@ router.get('/users', (req, res) => {
     });
 });
 
+router.get('/test', (req, res) => {
+  res.status(200).json('That is okay with the route test');
+});
+
+router.post('/test', (req, res) => {
+  res.status(200).json('That is okay with the route test');
+});
+
 export default router;

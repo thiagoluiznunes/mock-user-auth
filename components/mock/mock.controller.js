@@ -15,7 +15,6 @@ function verifyToken(token) {
 }
 
 async function isAuthenticated(email, password) {
-  let res = false;
   let id = undefined;
   await userdb.users.findIndex(user => {
     if (user.email === email && user.password === password) {
