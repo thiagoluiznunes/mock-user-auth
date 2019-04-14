@@ -7,7 +7,7 @@
     "build": "babel src --out-dir dist",
     "start": "node ./bin/www",
     "test": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js --reporter=landing",
-    "test:tdd": "NODE_ENV=test mocha --require @babel/register ./**/*.spec.js --watch",
+    "test:tdd": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js --watch",
     "test:coverage": "nyc npm test"
   },
   "nyc": {

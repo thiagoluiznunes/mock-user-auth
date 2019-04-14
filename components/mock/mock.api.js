@@ -4,12 +4,16 @@ const router = express.Router();
 
 router.post('/auth', (req, res) => {
   const { email, password } = req.body;
-  ctrl.isAuthenticated(email, password).then(response => {
-    if (!response.data) res.status(401).json({ message : 'Incorrect email or password'});
-    const id = response.data;
-    const access_token = ctrl.createToken({ email, id });
-    res.status(200).json({ token: access_token });
-  });
+  ctrl.isAuthenticated(email, password)
+    .then(response => {
+      if (!response.data) res.status(401).json({ message : 'Incorrect email or password'});
+      const id = response.data;
+      const access_token = ctrl.createToken({ email, id });
+      res.status(200).json({ token: access_token });
+    })
+    .catch(err =>  {
+      throw err;
+    });
 });
 
 router.post('/users', (req, res) => {

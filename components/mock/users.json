@@ -6,6 +6,13 @@
       "email": "nunes@gmail.com",
       "password": "123456",
       "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
+    },
+    {
+      "id": 39100,
+      "name": "User test",
+      "email": "user@test.com",
+      "password": "user123",
+      "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
     }
   ]
 }

@@ -18,7 +18,6 @@ async function isAuthenticated(email, password) {
   let id = undefined;
   await userdb.users.findIndex(user => {
     if (user.email === email && user.password === password) {
-      res = true;
       id = user.id;
     }
   });
