@@ -15,6 +15,9 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 function normalizePort(val) {
+  if (process.env.NODE_ENV === 'test') {
+    return 3000;
+  }
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -61,3 +64,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+export default server;

@@ -31,8 +31,4 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
-if (process.env.NODE_ENV === 'test') {
-  app.listen(3000);
-}
-
 export default app;
