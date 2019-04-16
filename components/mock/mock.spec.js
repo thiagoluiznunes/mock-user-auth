@@ -19,11 +19,9 @@ describe('Module mock' , () => {
   it('It should be a module', () => {
     assert.typeOf(mock, 'Object');
   });
-
   it('It should be a express router function ', () => {
     assert.typeOf(mock.api, 'function');
   });
-
   it('It should be a object ', () => {
     assert.typeOf(mock.controller, 'Object');
   });
@@ -47,7 +45,6 @@ describe('Mock Api' , () => {
       });
     });
   });
-
   describe('/Auth User', () => {
     it('It should authenticate user', async () => {
       chai.request(server)
@@ -61,7 +58,6 @@ describe('Mock Api' , () => {
       });
     });
   });
-
   describe('/GET User', () => {
     it('It should get a user by token', async () => {
       chai.request(server)

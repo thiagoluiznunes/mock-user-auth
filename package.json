@@ -6,6 +6,7 @@
     "dev": "nodemon --exec babel-node ./bin/www",
     "build": "babel src --out-dir dist",
     "start": "node ./bin/www",
+    "lint": "./node_modules/.bin/eslint ./bin/*.js ./components/**/*.js ./config/*.js",
     "test": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js --reporter=landing",
     "test:tdd": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js --watch",
     "test:coverage": "nyc npm test"
@@ -37,6 +38,7 @@
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "eslint": "^5.16.0",
     "mocha": "^6.1.2",
     "nyc": "^13.3.0"
   }
