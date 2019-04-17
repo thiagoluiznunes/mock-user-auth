@@ -34,7 +34,6 @@ router.post('/users', (req, res) => {
 router.get('/users', (req, res) => {
   const authorization = 'authorization';
   const token = req.body.token || req.query.token || req.headers[authorization];
-  console.log(token)
   ctrl.getUser(token)
     .then(response => {
       if (!response.status) return res.status(401).json({ message: response.data });
@@ -43,14 +42,6 @@ router.get('/users', (req, res) => {
     .catch(err => {
       throw err;
     });
-});
-
-router.get('/test', (req, res) => {
-  res.status(200).json('That is okay with the route test');
-});
-
-router.post('/test', (req, res) => {
-  res.status(200).json('That is okay with the route test');
 });
 
 export default router;
