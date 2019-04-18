@@ -10,18 +10,16 @@ function createToken(payload) {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
 
-function verifyToken(token) {
-  return jwt.verify(token, SECRET_KEY, (err, decode) => decode !== undefined ? decode : err);
-}
-
 async function isAuthenticated(email, password) {
   let id = undefined;
+  let res = false;
   await userdb.users.findIndex(user => {
     if (user.email === email && user.password === password) {
       id = user.id;
+      res = true;
     }
   });
-  return { data: id };
+  return { data: id, status: res};
 }
 
 async function postUser(name, email, password, imageUrl) {
@@ -43,7 +41,7 @@ async function postUser(name, email, password, imageUrl) {
     });
     fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
   }
-  return { data: id };
+  return { data: id, status: res};
 }
 
 async function getUser(token) {
@@ -70,7 +68,6 @@ async function getUser(token) {
 
 export default {
   createToken,
-  verifyToken,
   isAuthenticated,
   postUser,
   getUser
