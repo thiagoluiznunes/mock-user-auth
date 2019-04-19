@@ -7,11 +7,17 @@
     "build": "babel src --out-dir dist",
     "start": "node ./bin/www",
     "lint": "./node_modules/.bin/eslint ./bin/*.js ./components/**/*.js ./config/*.js",
-    "test": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js --reporter=landing",
+    "test": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js",
+    "test:pretty": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js --reporter=landing",
     "test:tdd": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js --watch",
     "test:coverage": "nyc npm test"
   },
   "nyc": {
+    "require": [
+      "@babel/register"
+    ],
+    "sourceMap": false,
+    "instrument": false,
     "reporter": [
       "text",
       "html"
@@ -35,6 +41,7 @@
     "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.3",
+    "babel-plugin-istanbul": "^5.1.2",
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
