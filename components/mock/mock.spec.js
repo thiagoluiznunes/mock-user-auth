@@ -9,13 +9,13 @@ const assert = chai.assert;
 const expect = chai.expect;
 
 const user = {
-  name: 'User test',
+  name: 'user',
   email: 'user@test.com',
   password: 'user123'
 }
 let token = null;
 
-describe('Module mock' , () => {
+describe('Mock Module' , () => {
   it('It should be a module', () => {
     assert.typeOf(mock, 'Object');
   });
@@ -27,8 +27,26 @@ describe('Module mock' , () => {
   });
 });
 
-chai.use(chaiHttp);
+describe('Mock Controller', () => {
+  describe('isAuthenticated Function', () => {
+    it('It should check the function return ', async () => {
+      mock.controller.isAuthenticated(user.email, user.password)
+        .then(res => {
+          expect(res.status).to.be.an('boolean');
+        });
+    });
+  });
+  describe('postUser Function', () => {
+    it('It should check the function return', async () => {
+      mock.controller.postUser('controller','controller@test.com','controller123','https://')
+        .then(res => {
+          expect(res.status).to.be.an('boolean');
+        });
+    });
+  });
+});
 
+chai.use(chaiHttp);
 describe('Mock Api' , () => {
   describe('/POST User', () => {
     it('It should create a new user', async () => {
@@ -37,7 +55,7 @@ describe('Mock Api' , () => {
       .send(user)
       .end((err, res) => {
         expect(res.status).to.be.oneOf([200, 401]);
-        expect(res.body).to.be.an('Object')
+        expect(res.body).to.be.an('Object');
         expect(res.body.message).to.be.oneOf([
           'User registered with success',
           'User already registered'

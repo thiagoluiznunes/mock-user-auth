@@ -8,8 +8,15 @@
       "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
     },
     {
-      "id": 39100,
-      "name": "User test",
+      "id": 55211,
+      "name": "controller",
+      "email": "controller@test.com",
+      "password": "controller123",
+      "imageUrl": "https://"
+    },
+    {
+      "id": 88872,
+      "name": "user",
       "email": "user@test.com",
       "password": "user123",
       "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
