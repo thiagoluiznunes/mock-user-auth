@@ -1,21 +1,7 @@
 {
   "users": [
     {
-      "id": 5873,
-      "name": "Thiago",
-      "email": "nunes@gmail.com",
-      "password": "123456",
-      "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
-    },
-    {
-      "id": 55211,
-      "name": "controller",
-      "email": "controller@test.com",
-      "password": "controller123",
-      "imageUrl": "https://"
-    },
-    {
-      "id": 88872,
+      "id": 87893,
       "name": "user",
       "email": "user@test.com",
       "password": "user123",

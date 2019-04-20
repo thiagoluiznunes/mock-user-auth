@@ -11,7 +11,7 @@ router.post('/auth', (req, res) => {
       const access_token = ctrl.createToken({ email, id });
       res.status(200).json({ token: access_token });
     })
-    .catch(err =>  {
+    .catch(err => {
       throw err;
     });
 });
@@ -42,6 +42,16 @@ router.get('/users', (req, res) => {
     .catch(err => {
       throw err;
     });
+});
+
+router.delete('/users', (req, res) => {
+  const { key_admin } = req.body;
+  if (key_admin === '123456') {
+    ctrl.deleteUsers();
+    res.status(200).json({ message: 'Users deleted with success' });
+  } else {
+    res.status(403).json({ message: 'Unauthorized rule' });
+  }
 });
 
 export default router;

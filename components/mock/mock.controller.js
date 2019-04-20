@@ -10,6 +10,12 @@ function createToken(payload) {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
 
+async function deleteUsers() {
+  userdb.users = [];
+  await fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
+  return true;
+}
+
 async function isAuthenticated(email, password) {
   let id = undefined;
   let res = false;
@@ -23,15 +29,15 @@ async function isAuthenticated(email, password) {
 }
 
 async function postUser(name, email, password, imageUrl) {
-  let res = true;
-  let id = undefined;
+  let exist = false;
   await userdb.users.findIndex(user => {
     if (user.email === email) {
-      res = false;
+      exist = true;
     }
   });
-  if (res) {
-    id = faker.random.number();
+
+  if (!exist) {
+    const id = await faker.random.number();
     await userdb.users.push({
       id: id,
       name: name,
@@ -40,8 +46,10 @@ async function postUser(name, email, password, imageUrl) {
       imageUrl: imageUrl
     });
     fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
+    return { data: id, status: true };
+  } else {
+    return { data: undefined, status: false }
   }
-  return { data: id, status: res};
 }
 
 async function getUser(token) {
@@ -70,5 +78,6 @@ export default {
   createToken,
   isAuthenticated,
   postUser,
-  getUser
+  getUser,
+  deleteUsers
 }

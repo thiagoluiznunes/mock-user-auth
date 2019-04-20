@@ -27,8 +27,8 @@ describe('Mock Module' , () => {
   });
 });
 
-describe('Mock Controller', () => {
-  describe('isAuthenticated Function', () => {
+describe('Mock Controller', async () => {
+  describe('IsAuthenticated Function', () => {
     it('It should check the function return ', async () => {
       mock.controller.isAuthenticated(user.email, user.password)
         .then(res => {
@@ -36,18 +36,45 @@ describe('Mock Controller', () => {
         });
     });
   });
-  describe('postUser Function', () => {
-    it('It should check the function return', async () => {
+  describe('DeleteUsers Function', () => {
+    it('It should delete all users', async () => {
+      mock.controller.deleteUsers()
+        .then(res => {
+          expect(res).to.equal(true);
+        });
+    });
+  });
+  describe('PostUser Function', () => {
+    it('It should insert a new user', async () => {
       mock.controller.postUser('controller','controller@test.com','controller123','https://')
         .then(res => {
           expect(res.status).to.be.an('boolean');
+          expect(res.status).to.equal(true);
+        });
+      });
+      it('It should block the insertion of existent user', async () => {
+        mock.controller.postUser('controller','controller@test.com','controller123','https://')
+        .then(res => {
+          expect(res.status).to.be.an('boolean');
+          expect(res.status).to.equal(false);
         });
     });
   });
 });
 
 chai.use(chaiHttp);
+
 describe('Mock Api' , () => {
+  describe('/DELETE Users', () => {
+    it('It should delete all users', async () => {
+      chai.request(server)
+      .delete('/api/v1/users')
+      .send({ key_admin: '123456' })
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+      });
+    });
+  });
   describe('/POST User', () => {
     it('It should create a new user', async () => {
       chai.request(server)
