@@ -111,7 +111,7 @@ describe('Mock Api' , () => {
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body).to.be.an('Object');
-        expect(res.body.data).to.be.not.empty;
+        expect(res.body).to.be.not.empty;
       });
     });
   });
