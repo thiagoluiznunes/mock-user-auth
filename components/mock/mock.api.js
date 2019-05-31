@@ -12,7 +12,7 @@ router.post('/auth', asyncMiddleware(async (req, res) => {
   const { email, password } = req.body;
   const response = await ctrl.isAuthenticated(email, password);
 
-  if (!response.status) res.status(401).json({ message: 'Incorrect email or password' });
+  if (!response.status || response.data === null) return res.status(401).json({ message: 'Incorrect email or password' });
   const id = response.data;
   const access_token = ctrl.createToken({ email, id });
   res.status(200).json({ token: access_token });
