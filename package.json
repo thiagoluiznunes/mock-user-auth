@@ -7,9 +7,9 @@
     "build": "babel src --out-dir dist",
     "start": "node ./bin/www",
     "lint": "./node_modules/.bin/eslint ./bin/*.js ./components/**/*.js ./config/*.js",
-    "test": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js",
-    "test:pretty": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js --reporter=landing",
-    "test:tdd": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./**/*.spec.js --watch",
+    "test": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./components/**/*.spec.js ./**/*.spec.js",
+    "test:pretty": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./components/**/*.spec.js ./**/*.spec.js --reporter=landing",
+    "test:tdd": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./components/**/*.spec.js ./**/*.spec.js --watch",
     "test:coverage": "nyc npm test"
   },
   "nyc": {
