@@ -63,49 +63,45 @@ describe('Mock Controller', () => {
 
 chai.use(chaiHttp);
 
+const userDeleteRequest = (key, code) => {
+  chai.request(server)
+    .delete('/api/v1/users')
+    .send({ key_admin: key })
+    .end((err, res) => {
+      expect(res.status).to.equal(code);
+    });
+}
+const userPostRequest = (code, message) => {
+  chai.request(server)
+    .post('/api/v1/users')
+    .send(user)
+    .end((err, res) => {
+      expect(res.status).to.equal(code);
+      expect(res.body).to.be.an('Object');
+      expect(res.body.message).to.be.equal(message);
+    });
+}
+
 describe('Mock Api', () => {
   describe('/DELETE Users 200', () => {
     it('It should delete all users', () => {
-      chai.request(server)
-        .delete('/api/v1/users')
-        .send({ key_admin: '123456' })
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-        });
+      userDeleteRequest('123456', 200);
     });
   });
   describe('/DELETE Users 403', () => {
     it('It should not delete all users', () => {
-      chai.request(server)
-        .delete('/api/v1/users')
-        .send({ key_admin: 'wrongpassword' })
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-        });
+      userDeleteRequest('wrongpassword', 403);
     });
   });
+
   describe('/POST User 200', () => {
     it('It should create a new user', () => {
-      chai.request(server)
-        .post('/api/v1/users')
-        .send(user)
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(res.body).to.be.an('Object');
-          expect(res.body.message).to.be.equal('User registered with success');
-        });
+      userPostRequest(200, 'User registered with success');
     });
   });
   describe('/POST User 401', () => {
     it('It should not create a new user', () => {
-      chai.request(server)
-        .post('/api/v1/users')
-        .send(user)
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
-          expect(res.body).to.be.an('Object');
-          expect(res.body.message).to.be.equal('User already registered');
-        });
+      userPostRequest(401, 'User already registered');
     });
   });
   describe('/Auth User 200', () => {
