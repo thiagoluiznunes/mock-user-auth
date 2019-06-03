@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'test';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import mock from './mock';
-import server from '../../bin/www';
+import { server } from '../../bin/www';
 
 const assert = chai.assert;
 const expect = chai.expect;

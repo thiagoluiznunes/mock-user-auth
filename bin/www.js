@@ -16,7 +16,7 @@ server.on('listening', onListening);
 
 function normalizePort(val) {
   if (process.env.NODE_ENV === 'test') {
-    return 3000;
+    return 3001;
   }
   const port = parseInt(val, 10);
 
@@ -24,12 +24,10 @@ function normalizePort(val) {
     // named pipe
     return val;
   }
-
   if (port >= 0) {
     // port number
     return port;
   }
-
   return false;
 }
 
@@ -65,4 +63,4 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-export default server;
+export { server, normalizePort, onError };
