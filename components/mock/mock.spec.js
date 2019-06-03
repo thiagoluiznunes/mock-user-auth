@@ -14,6 +14,14 @@ const user = {
   password: 'user123'
 }
 
+const userPost = (bool) => {
+  mock.controller.postUser('controller', 'controller@test.com', 'controller123', 'https://')
+    .then(res => {
+      expect(res.status).to.be.an('boolean');
+      expect(res.status).to.equal(bool);
+    });
+}
+
 describe('Mock Module', () => {
   it('It should be a module', () => {
     assert.typeOf(mock, 'Object');
@@ -43,29 +51,12 @@ describe('Mock Controller', () => {
         });
     });
   });
-  const userPost = (bool) => {
-    mock.controller.postUser('controller', 'controller@test.com', 'controller123', 'https://')
-      .then(res => {
-        expect(res.status).to.be.an('boolean');
-        expect(res.status).to.equal(bool);
-      });
-  }
   describe('PostUser Function', () => {
     it('It should insert a new user', () => {
       userPost(true);
-      // mock.controller.postUser('controller', 'controller@test.com', 'controller123', 'https://')
-      //   .then(res => {
-      //     expect(res.status).to.be.an('boolean');
-      //     expect(res.status).to.equal(true);
-      //   });
     });
     it('It should block the insertion of existent user', () => {
       userPost(false);
-      // mock.controller.postUser('user123', 'controller@test.com', 'user123', 'https://')
-      //   .then(res => {
-      //     expect(res.status).to.be.an('boolean');
-      //     expect(res.status).to.equal(false);
-      //   });
     });
   });
 });
@@ -80,6 +71,7 @@ const userDeleteRequest = (key, code) => {
       expect(res.status).to.equal(code);
     });
 }
+
 const userPostRequest = (code, message) => {
   chai.request(server)
     .post('/api/v1/users')
@@ -88,6 +80,28 @@ const userPostRequest = (code, message) => {
       expect(res.status).to.equal(code);
       expect(res.body).to.be.an('Object');
       expect(res.body.message).to.be.equal(message);
+    });
+}
+
+const userAuthRequest = (code, data) => {
+  let token;
+  chai.request(server)
+    .post('/api/v1/auth')
+    .send(data)
+    .end((err, res) => {
+      expect(res.status).to.equal(code);
+      expect(res.body).to.be.an('Object');
+    });
+}
+
+const userGetRequest = (code, data) => {
+  chai.request(server)
+    .get('/api/v1/users')
+    .set('Authorization', data)
+    .end((err, res) => {
+      expect(res.status).to.equal(code);
+      expect(res.body).to.be.an('Object');
+      expect(res.body).to.be.not.empty;
     });
 }
 
@@ -115,40 +129,22 @@ describe('Mock Api', () => {
   });
   describe('/Auth User 200', () => {
     after(() => {
-      chai.request(server)
-        .delete('/api/v1/users')
-        .send({ key_admin: '123456' })
-        .end((err, res) => { });
+      userDeleteRequest('123456', 200);
+
     });
     it('It should authenticate user', () => {
-      chai.request(server)
-        .post('/api/v1/auth')
-        .send(user)
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(res.body).to.be.an('Object');
-          expect(res.body.token).to.be.not.empty;
-        });
+      userAuthRequest(200, user);
     });
   });
   describe('/Auth User 401', () => {
     it(`It shouldn't authenticate user`, () => {
-      chai.request(server)
-        .post('/api/v1/auth')
-        .send({ name: 'user', email: 'user@test.com', password: 'wrongpassword' })
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
-          expect(res.body).to.be.an('Object');
-        });
+      userAuthRequest(401, { name: 'user', email: 'user@test.com', password: 'wrongpassword' });
     });
   });
   describe('/GET User 200', () => {
     let token;
     before(() => {
-      chai.request(server)
-        .post('/api/v1/users')
-        .send(user)
-        .end((err, res) => { });
+      userPostRequest(200, 'User registered with success');
       chai.request(server)
         .post('/api/v1/auth')
         .send(user)
@@ -157,32 +153,15 @@ describe('Mock Api', () => {
         });
     });
     after(() => {
-      chai.request(server)
-        .delete('/api/v1/users')
-        .send({ key_admin: '123456' })
-        .end((err, res) => { });
+      userDeleteRequest('123456', 200);
     });
     it('It should get a user by token', () => {
-      chai.request(server)
-        .get('/api/v1/users')
-        .set('Authorization', token)
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(res.body).to.be.an('Object');
-          expect(res.body).to.be.not.empty;
-        });
+      userGetRequest(200, token);
     });
   });
   describe('/GET User 403', () => {
     it('It should get a user by token', () => {
-      chai.request(server)
-        .get('/api/v1/users')
-        .set('Authorization', 'wrongtoken')
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-          expect(res.body).to.be.an('Object');
-          expect(res.body).to.be.not.empty;
-        });
+      userGetRequest(403, 'wrongtoken');
     });
   });
 });
