@@ -1,0 +1,14 @@
+{
+  "require": [
+    "@babel/register"
+  ],
+  "sourceMap": false,
+  "instrument": false,
+  "reporter": [
+    "text",
+    "html"
+  ],
+  "exclude": [
+    "tests/**"
+  ]
+}

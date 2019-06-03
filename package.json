@@ -12,20 +12,6 @@
     "test:tdd": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./components/**/*.spec.js ./**/*.spec.js --watch",
     "test:coverage": "nyc npm test"
   },
-  "nyc": {
-    "require": [
-      "@babel/register"
-    ],
-    "sourceMap": false,
-    "instrument": false,
-    "reporter": [
-      "text",
-      "html"
-    ],
-    "exclude": [
-      "tests/**"
-    ]
-  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "debug": "~2.6.9",
