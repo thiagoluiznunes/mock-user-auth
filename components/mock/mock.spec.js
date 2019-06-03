@@ -43,20 +43,29 @@ describe('Mock Controller', () => {
         });
     });
   });
+  const userPost = (bool) => {
+    mock.controller.postUser('controller', 'controller@test.com', 'controller123', 'https://')
+      .then(res => {
+        expect(res.status).to.be.an('boolean');
+        expect(res.status).to.equal(bool);
+      });
+  }
   describe('PostUser Function', () => {
     it('It should insert a new user', () => {
-      mock.controller.postUser('controller', 'controller@test.com', 'controller123', 'https://')
-        .then(res => {
-          expect(res.status).to.be.an('boolean');
-          expect(res.status).to.equal(true);
-        });
+      userPost(true);
+      // mock.controller.postUser('controller', 'controller@test.com', 'controller123', 'https://')
+      //   .then(res => {
+      //     expect(res.status).to.be.an('boolean');
+      //     expect(res.status).to.equal(true);
+      //   });
     });
     it('It should block the insertion of existent user', () => {
-      mock.controller.postUser('user123', 'controller@test.com', 'user123', 'https://')
-        .then(res => {
-          expect(res.status).to.be.an('boolean');
-          expect(res.status).to.equal(false);
-        });
+      userPost(false);
+      // mock.controller.postUser('user123', 'controller@test.com', 'user123', 'https://')
+      //   .then(res => {
+      //     expect(res.status).to.be.an('boolean');
+      //     expect(res.status).to.equal(false);
+      //   });
     });
   });
 });
