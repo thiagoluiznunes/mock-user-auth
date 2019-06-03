@@ -52,7 +52,7 @@ describe('Mock Controller', () => {
         });
     });
     it('It should block the insertion of existent user', () => {
-      mock.controller.postUser('controller', 'controller@test.com', 'controller123', 'https://')
+      mock.controller.postUser('user123', 'controller@test.com', 'user123', 'https://')
         .then(res => {
           expect(res.status).to.be.an('boolean');
           expect(res.status).to.equal(false);
@@ -75,7 +75,7 @@ describe('Mock Api', () => {
     });
   });
   describe('/DELETE Users 403', () => {
-    it('It should delete all users', () => {
+    it('It should not delete all users', () => {
       chai.request(server)
         .delete('/api/v1/users')
         .send({ key_admin: 'wrongpassword' })
@@ -97,7 +97,7 @@ describe('Mock Api', () => {
     });
   });
   describe('/POST User 401', () => {
-    it('It should create a new user', () => {
+    it('It should not create a new user', () => {
       chai.request(server)
         .post('/api/v1/users')
         .send(user)
