@@ -2,9 +2,6 @@ sudo: false
 language: node_js
 node_js:
   - 'stable'
-branches:
-  only:
-    - test
 cache:
   directories:
     - node_modules
