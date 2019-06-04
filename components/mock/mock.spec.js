@@ -84,7 +84,6 @@ const userPostRequest = (code, message) => {
 }
 
 const userAuthRequest = (code, data) => {
-  let token;
   chai.request(server)
     .post('/api/v1/auth')
     .send(data)
