@@ -8,8 +8,7 @@
     "start": "node ./bin/www",
     "lint": "./node_modules/.bin/eslint ./bin/*.js ./components/**/*.js ./config/*.js",
     "test": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./components/**/*.spec.js ./**/*.spec.js",
-    "coverage": "nyc npm test",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc --reporter=lcov npm test "
   },
   "dependencies": {
     "body-parser": "^1.18.3",

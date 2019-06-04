@@ -2,6 +2,10 @@ sudo: false
 language: node_js
 node_js:
   - 'stable'
+addons:
+  code_climate:
+    repo_token:
+      secure: "cxIq5JaW/BWJGB7txYNTgx5sMyrzSq5tn+8/lrENJjeyJ+7uYBSh+Qt9WMRcsM9JF788K782mGruPysgqz4oZ5SB5+fECKWYMog+mmfsGdr0Mk7mI36H31owtOjNPcuRtXhKgTvHSnq2aQCbqd9EKTmIiiGd6l7zigJYn4M6uFHR2sBGsZRRB/s+1FIq6sCB+KxsVurJUIqE76ylG6JceY97AWnIETwHLO1hQY0Bxy09CeK+lKCxZeIFPAKc3B7Qv01Mr97Ho4sBx3CBxgrbS31dQm7yCW+NtaXKkZ8APaSJyczn2WdpEjGz01Co/VGr5BvbtFGXwSG4AeZmaWkz4Ok4R88sJb85ZhpLqZTdQbbGPgLWkQgT08WMhfEyR1RJgl6LaacYeP7GKXgr4PDzOFhSuN+7Df3AjAwNUAZJKDckmlxwgyFSr4w69eCGt30/+9hdQdilwgkaCxWLqFWIh3mOkwVmOqCJtyXLSQBPOU8Nz07sywEck0nvVv+wqeyzobKWuG9t2EtIN+sQWFoosnbJvdfLzzXEzNIMeCGp3NiOKOr1JDIhgn/6M7tVVMccZ7cSew67/O1Y2nVupfLnMOrp64uFKgIKFacy/Q4AZ8TOFgwnTAnX/fXY4HphvG8Hi3dw29ZEguoUWqIqyarfFnBCyOv7iE0nbMt/yAQ/owA="
 cache:
   directories:
     - node_modules
@@ -9,7 +13,9 @@ before_install:
   - npm update
 install:
   - npm install
+before_script:
+  - npm install codeclimate-test-reporter -g
 script:
-  - npm run test
-after_success:
-  - npm run coveralls
+  - npm run coverage
+after_script:
+  - codeclimate-test-reporter < ./coverage/lcov.info
