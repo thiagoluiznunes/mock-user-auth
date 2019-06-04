@@ -8,9 +8,8 @@
     "start": "node ./bin/www",
     "lint": "./node_modules/.bin/eslint ./bin/*.js ./components/**/*.js ./config/*.js",
     "test": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./components/**/*.spec.js ./**/*.spec.js",
-    "test:pretty": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./components/**/*.spec.js ./**/*.spec.js --reporter=landing",
-    "test:tdd": "NODE_ENV=test mocha --require @babel/register --require babel-polyfill ./components/**/*.spec.js ./**/*.spec.js --watch",
-    "test:coverage": "nyc npm test"
+    "coverage": "nyc npm test",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -31,8 +30,10 @@
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "coveralls": "^3.0.3",
     "eslint": "^5.16.0",
     "mocha": "^6.1.2",
+    "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^13.3.0"
   }
 }
