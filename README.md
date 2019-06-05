@@ -13,7 +13,7 @@ This project contains an authenticated REST API developed in Node.js that is tes
 
 Toolkit: Node.js | Express.js | Mocha | Chai | Istanbul
 
-## Requirements ##
+### Requirements ###
 
 * **[Node.js v11.14.0](http://nodejs.org/en/)** :white_check_mark:
 * **[Express.js ~4.16.0](http://expressjs.com/)** :white_check_mark:
@@ -21,7 +21,7 @@ Toolkit: Node.js | Express.js | Mocha | Chai | Istanbul
 * **[Chai.js 4.2.0](https://www.chaijs.com/)** :white_check_mark:
 * **[Istanbul.js 13.3.0](https://istanbul.js.org/)** :white_check_mark:
 
-## Installation ##
+### Installation ###
 
 **Obs.: The following instructions were tested on Ubuntu distribution.**
 
@@ -33,7 +33,7 @@ Toolkit: Node.js | Express.js | Mocha | Chai | Istanbul
   - use@user:~/path_to_cloned_folder/ **npm start**
   - Access the browser http://localhost:3000/api/v1/users
 
-## API Routes ##
+### API Routes ###
 |   Action            | Required |  Method  | URL
 |   ------------------|----------|----------|--------------
 |   AUTHENTICATE USER |          | `POST`   | /api/v1/auth
@@ -41,7 +41,7 @@ Toolkit: Node.js | Express.js | Mocha | Chai | Istanbul
 |   GET USER          | Auth     | `GET`    | /api/v1/users
 |   DELETE USERS      |          | `DELETE` | /api/v1/users
 
-### AUTHENTICATE USER ###
+#### AUTHENTICATE USER ####
 * REQUEST
 ```
 POST /api/v1/auth
@@ -59,7 +59,7 @@ POST /api/v1/auth
 }
 ```
 
-### CREATE USER ###
+#### CREATE USER ####
 * REQUEST
 ```
 POST /api/v1/users
@@ -79,7 +79,7 @@ POST /api/v1/users
 }
 ```
 
-### GET USER ###
+#### GET USER ####
 * REQUEST
 ```
 GET /api/v1/users
@@ -99,7 +99,7 @@ req.setRequestHeader('Authorization', token);
 }
 ```
 
-### DELETE USERS ###
+#### DELETE USERS ####
 * REQUEST
 ```
 DELETE /api/v1/users
