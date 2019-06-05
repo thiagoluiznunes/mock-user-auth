@@ -1,7 +1,13 @@
 {
   "name": "mock-json-server",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
+  "author": {
+    "name": "Thiago Luiz Nunes",
+    "email": "thiagoluiz.dev@gmail.com",
+    "url": "https://github.com/thiagoluiznunes"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "./node_modules/.bin/nodemon --exec babel-node ./bin/www",
     "build": "./node_modules/.bin/babel src --out-dir dist",
