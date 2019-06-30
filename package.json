@@ -1,6 +1,6 @@
 {
   "name": "mock-user-auth",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "description": "Mock-User-Auth is a mock user authentication API developed in Nodejs and Express using JWT as an authenticator",
   "private": false,
   "author": "Thiago Luiz Nunes <thiagoluiz.dev@gmail.com> (https://github.com/thiagoluiznunes)",

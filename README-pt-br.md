@@ -136,7 +136,7 @@ req.setRequestHeader('Authorization', token);
 }
 ```
 
-#### DELETE USUÁRIO POR TOKEN ####
+#### DELETAR USUÁRIO POR TOKEN ####
 * REQUISIÇÃO
 ```
 DELETE /api/v1/users
