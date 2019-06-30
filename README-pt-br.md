@@ -20,11 +20,11 @@ Ferramentas: Node.js | Express.js | Mocha | Chai | Istanbul
 * **[Npm 6.x](https://www.npmjs.com/)** :white_check_mark:
 
 ### Npm ###
-1. Instalando pacote via npm:
+1 - Instalando pacote via npm:
 ```
 $ npm i --save mock-user-auth
 ```
-2. Criando script no package.json:
+2 - Criando script no package.json:
 ```json
  {
    "script": {
@@ -32,7 +32,7 @@ $ npm i --save mock-user-auth
    }
  }
 ```
-3. Iniciando api:
+3 - Iniciando api:
 ```
 $ npm run dev
 ```
@@ -45,11 +45,11 @@ $ npm run dev 8080
 
 **Obs.: As seguintes instruções foram testadas na distribuição do Ubuntu.**
 
-1. Depois de clonar o repositório 'git clone' (comando), execute os seguintes comandos para instalar as dependências do projeto:
+1 - Depois de clonar o repositório 'git clone' (comando), execute os seguintes comandos para instalar as dependências do projeto:
   - user@user:~/diretorio_projeto_clonado/$ **npm install**
   - **Instale manualmente as dependências que podem não ter sido instaladas pelo comando acima.** :white_check_mark:
 
-2. Iniciar aplicação
+2 - Iniciar aplicação
   - use@user:~/diretorio_projeto_clonado/ **npm start**
   - Acesse pelo nevagador http://localhost:3000/api/v1/users
 
