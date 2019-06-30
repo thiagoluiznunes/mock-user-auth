@@ -7,7 +7,7 @@
 [![Issue Count](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/badges/issue_count.svg)](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/issues)
 
 ---
-Mock-User-Auth é uma API de autenticação de usuário mock desenvolvida em Nodejs e Express utilizando JWT como autenticador utilizando a versão ES6 do JavaScript.
+Mock-User-Auth é uma API de autenticação de usuário mock desenvolvida em Nodejs e Express utilizando JWT como autenticador na versão ES6 do JavaScript.
 
 **Objetivo**: pode ser usado para ajudar no desenvolvimento do front-end. É simples e rápido, você só precisa seguir os passos abaixo.
 

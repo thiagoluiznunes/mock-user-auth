@@ -9,7 +9,7 @@
 **[README.md  pt-br](https://github.com/thiagoluiznunes/mock-user-auth/blob/master/README-pt-br.md)**
 
 ---
-Mock-User-Auth is a mock user authentication API developed in Nodejs and Express using JWT as an authenticator using the ES6 version of JavaScript.
+Mock-User-Auth is a mock user authentication API developed in Nodejs and Express using JWT as an authenticator in the ES6 version of JavaScript.
 
 **The use**: It can be used to assist your front-end development. It's simple and fast, you just need to follow the steps below.
 
