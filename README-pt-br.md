@@ -88,7 +88,7 @@ GET /api/v1/users
 ```
 ```javascript
 const token = 'eyJhbGciOiJI...';
-req.setREQUISIÇÃOHeader('Authorization', token);
+req.setRequestHeader('Authorization', token);
 ```
 * RESPOSTA
 ```json
@@ -108,7 +108,7 @@ PATCH /api/v1/users
 ```
 ```javascript
 const token = 'eyJhbGciOiJI...';
-req.setREQUISIÇÃOHeader('Authorization', token);
+req.setRequestHeader('Authorization', token);
 ```
 ```json
 {
@@ -131,7 +131,7 @@ DELETE /api/v1/users
 ```
 ```javascript
 const token = 'eyJhbGciOiJI...';
-req.setREQUISIÇÃOHeader('Authorization', token);
+req.setRequestHeader('Authorization', token);
 ```
 * RESPOSTA
 ```json
