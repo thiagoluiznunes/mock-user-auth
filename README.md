@@ -22,17 +22,25 @@ Toolkit: Node.js | Express.js | Mocha | Chai | Istanbul
 * **[Npm 6.x](https://www.npmjs.com/)** :white_check_mark:
 
 ### Npm ###
-1. Installing package:
+1. Install package:
 ```
 $ npm i --save mock-user-auth
 ```
-2. Creating script in package.json:
+2. Create script in package.json:
 ```json
  {
    "script": {
      "dev": "nodemon ./node_modules/mock-user-auth/bin/www.js"
    }
  }
+```
+3. Start api:
+```
+$ npm run dev
+```
+**Option: You can set the port after npm command:**
+```
+$ npm run dev 8080
 ```
 
 

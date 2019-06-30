@@ -32,6 +32,14 @@ $ npm i --save mock-user-auth
    }
  }
 ```
+3. Iniciando api:
+```
+$ npm run dev
+```
+**Opção: Você pode definir a porta após o comando npm:**
+```
+$ npm run dev 8080
+```
 
 ### Instalação do Projeto ###
 
