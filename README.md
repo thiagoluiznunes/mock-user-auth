@@ -110,6 +110,13 @@ PATCH /api/v1/users
 const token = 'eyJhbGciOiJI...';
 req.setRequestHeader('Authorization', token);
 ```
+```json
+{
+  "name": "newName",
+  "email": "new_email@gmail.com",
+  "password": "newpassword123"
+}
+```
 * RESPONSE
 ```json
 {
