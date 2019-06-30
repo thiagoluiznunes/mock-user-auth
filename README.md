@@ -1,5 +1,6 @@
 # mock-user-auth
 
+[![npm version](https://badge.fury.io/js/mock-user-auth.svg)](https://badge.fury.io/js/mock-user-auth)
 [![Build Status](https://travis-ci.org/thiagoluiznunes/mock-json-server.svg?branch=master)](https://travis-ci.org/thiagoluiznunes/mock-json-server)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b60e5e0c37609f6b21c0/maintainability)](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b60e5e0c37609f6b21c0/test_coverage)](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/test_coverage)
@@ -8,7 +9,7 @@
 **[README.md  pt-br](https://github.com/thiagoluiznunes/mock-user-auth/blob/master/README-pt-br.md)**
 
 ---
-Mock-User-Auth is a mock user authentication API developed in Nodejs and Express using JWT as an authenticator using the ES6 version of JavaScript. The API was tested using the Mocha & Chai libraries.
+Mock-User-Auth is a mock user authentication API developed in Nodejs and Express using JWT as an authenticator using the ES6 version of JavaScript.
 
 **The use**: It can be used to assist your front-end development. It's simple and fast, you just need to follow the steps below.
 
@@ -17,13 +18,25 @@ Toolkit: Node.js | Express.js | Mocha | Chai | Istanbul
 
 ### Requirements ###
 
-* **[Node.js v11.14.0](http://nodejs.org/en/)** :white_check_mark:
-* **[Express.js ~4.16.0](http://expressjs.com/)** :white_check_mark:
-* **[Mocha 6.1.2](https://mochajs.org/)** :white_check_mark:
-* **[Chai.js 4.2.0](https://www.chaijs.com/)** :white_check_mark:
-* **[Istanbul.js 13.3.0](https://istanbul.js.org/)** :white_check_mark:
+* **[Node.js 11.x](http://nodejs.org/en/)** :white_check_mark:
+* **[Npm 6.x](https://www.npmjs.com/)** :white_check_mark:
 
-### Installation ###
+### Npm ###
+1. Installing package:
+```
+$ npm i --save mock-user-auth
+```
+2. Creating script in package.json:
+```json
+ {
+   "script": {
+     "dev": "nodemon ./node_modules/mock-user-auth/bin/www.js"
+   }
+ }
+```
+
+
+### Project Installation ###
 
 **Obs.: The following instructions were tested on Ubuntu distribution.**
 
