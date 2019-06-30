@@ -5,8 +5,10 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b60e5e0c37609f6b21c0/test_coverage)](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/test_coverage)
 [![Issue Count](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/badges/issue_count.svg)](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/issues)
 
+**[README.md  pt-br](https://github.com/ThiagoLuizNunes/moch-user/auth/README-pt-br.md)** :white_check_mark:
+
 ---
-This project contains an authenticated REST API developed in Node.js that is testable by Mocha & Chai and was encoded using the ESLint standard and the ES6 version of JavaScript.
+Mock-User-Auth is a mock user authentication API developed in Nodejs and Express using JWT as an authenticator using the ES6 version of JavaScript. The API was tested using the Mocha & Chai libraries.
 
 **The use**: It can be used to assist your front-end development. It's simple and fast, you just need to follow the steps below.
 
