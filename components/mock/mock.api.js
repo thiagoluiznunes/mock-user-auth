@@ -44,7 +44,7 @@ router.patch('/users', asyncMiddleware(async (req, res) => {
   let token = req.body.token || req.query.token || req.headers[authorization];
   const response = await ctrl.updateUser(token, req.body);
   if (!response.status) return resHandler(res, 403, 'Unauthorized');
-  res.status(200).json('User updated with success!');
+  res.status(200).json({ message: 'User updated with success!' });
 }));
 
 router.delete('/users', asyncMiddleware(async (req, res) => {
@@ -52,7 +52,7 @@ router.delete('/users', asyncMiddleware(async (req, res) => {
   let token = req.body.token || req.query.token || req.headers[authorization];
   const response = await ctrl.deleteUser(token, req.body);
   if (!response.status) return resHandler(res, 403, 'Unauthorized');
-  res.status(200).json('User deleted with success!');
+  res.status(200).json({ message: 'User deleted with success!' });
 }));
 
 router.delete('/all-users', asyncMiddleware(async (req, res) => {

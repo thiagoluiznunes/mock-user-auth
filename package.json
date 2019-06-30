@@ -14,7 +14,7 @@
     "start": "./node_modules/.bin/nodemon --exec babel-node ./bin/www",
     "lint": "./node_modules/.bin/eslint ./bin/*.js ./components/**/*.js ./config/*.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --require @babel/register --require babel-polyfill ./components/**/*.spec.js ./**/*.spec.js",
-    "coverage": "./node_modules/.bin/nyc --reporter=lcov npm test "
+    "coverage": "./node_modules/.bin/nyc --reporter=lcov npm test"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

@@ -63,7 +63,7 @@ describe('Mock Controller', () => {
 
 chai.use(chaiHttp);
 
-const userDeleteRequest = (key, code) => {
+const deleteAllUsersRequest = (key, code) => {
   chai.request(server)
     .delete('/api/v1/all-users')
     .send({ key_admin: key })
@@ -104,15 +104,37 @@ const userGetRequest = (code, data) => {
     });
 }
 
+const userPatchRequest = (code, token, body) => {
+  chai.request(server)
+    .patch('/api/v1/users')
+    .set('Authorization', token, body)
+    .end((err, res) => {
+      expect(res.status).to.equal(code);
+      expect(res.body).to.be.an('Object');
+      expect(res.body).to.be.not.empty;
+    });
+}
+
+const userDeleteRequest = (code, token) => {
+  chai.request(server)
+    .delete('/api/v1/users')
+    .set('Authorization', token)
+    .end((err, res) => {
+      expect(res.status).to.equal(code);
+      expect(res.body).to.be.an('Object');
+      expect(res.body).to.be.not.empty;
+    });
+}
+
 describe('Mock Api', () => {
   describe('/DELETE Users 200', () => {
     it('It should delete all users', () => {
-      userDeleteRequest('keyadmin123', 200);
+      deleteAllUsersRequest('keyadmin123', 200);
     });
   });
   describe('/DELETE Users 403', () => {
     it('It should not delete all users', () => {
-      userDeleteRequest('wrongpassword', 403);
+      deleteAllUsersRequest('wrongpassword', 403);
     });
   });
 
@@ -128,7 +150,7 @@ describe('Mock Api', () => {
   });
   describe('/Auth User 200', () => {
     after(() => {
-      userDeleteRequest('keyadmin123', 200);
+      deleteAllUsersRequest('keyadmin123', 200);
 
     });
     it('It should authenticate user', () => {
@@ -152,15 +174,63 @@ describe('Mock Api', () => {
         });
     });
     after(() => {
-      userDeleteRequest('keyadmin123', 200);
+      deleteAllUsersRequest('keyadmin123', 200);
     });
     it('It should get a user by token', () => {
       userGetRequest(200, token);
     });
   });
   describe('/GET User 403', () => {
-    it('It should get a user by token', () => {
+    it('It should not get a user by token', () => {
       userGetRequest(403, 'wrongtoken');
+    });
+  });
+
+  describe('/PATCH User 200', () => {
+    let token;
+    before(() => {
+      userPostRequest(200, 'User registered with success');
+      chai.request(server)
+        .post('/api/v1/auth')
+        .send(user)
+        .end((err, res) => {
+          token = res.body.token;
+        });
+    });
+    after(() => {
+      deleteAllUsersRequest('keyadmin123', 200);
+    });
+    it('It should update a user by token', () => {
+      userPatchRequest(200, token, { name: 'newTestName' });
+    });
+  });
+  describe('/GET User 403', () => {
+    it('It should not update a user by token', () => {
+      userPatchRequest(403, 'wrongtoken', { name: 'newTestName' });
+    });
+  });
+
+  describe('/DELETE User 200', () => {
+    let token;
+    before(() => {
+      userPostRequest(200, 'User registered with success');
+      chai.request(server)
+        .post('/api/v1/auth')
+        .send(user)
+        .end((err, res) => {
+          token = res.body.token;
+        });
+    });
+    after(() => {
+      deleteAllUsersRequest('keyadmin123', 200);
+    });
+    it('It should update a user by token', () => {
+      userDeleteRequest(200, token);
+    });
+  });
+  describe('/DELETE User 403', () => {
+    it('It should not update a user by token', () => {
+      userDeleteRequest(403, 'wrongtoken');
     });
   });
 });
