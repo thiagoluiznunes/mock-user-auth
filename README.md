@@ -38,8 +38,10 @@ Toolkit: Node.js | Express.js | Mocha | Chai | Istanbul
 |   ------------------|----------|----------|--------------
 |   AUTHENTICATE USER |          | `POST`   | /api/v1/auth
 |   CREATE USER       |          | `POST`   | /api/v1/users
-|   GET USER          | Auth     | `GET`    | /api/v1/users
-|   DELETE USERS      |          | `DELETE` | /api/v1/users
+|   GET USER          |   Auth   | `GET`    | /api/v1/users
+|   PATCH USER        |   Auth   | `PATCH`  | /api/v1/users
+|   DELETE USER       |   Auth   | `DELETE` | /api/v1/users
+|   DELETE ALL USERS  |          | `DELETE` | /api/v1/users
 
 #### AUTHENTICATE USER ####
 * REQUEST
@@ -79,7 +81,7 @@ POST /api/v1/users
 }
 ```
 
-#### GET USER ####
+#### GET USER BY TOKEN ####
 * REQUEST
 ```
 GET /api/v1/users
@@ -99,14 +101,46 @@ req.setRequestHeader('Authorization', token);
 }
 ```
 
-#### DELETE USERS ####
+#### PATCH USER BY TOKEN ####
+* REQUEST
+```
+PATCH /api/v1/users
+```
+```javascript
+const token = 'eyJhbGciOiJI...';
+req.setRequestHeader('Authorization', token);
+```
+* RESPONSE
+```json
+{
+  "message": "User updated with success"
+}
+```
+
+#### DELETE USER BY TOKEN ####
 * REQUEST
 ```
 DELETE /api/v1/users
 ```
+```javascript
+const token = 'eyJhbGciOiJI...';
+req.setRequestHeader('Authorization', token);
+```
+* RESPONSE
 ```json
 {
-  "key_admin": "123456"
+  "message": "User deleted with success"
+}
+```
+
+#### DELETE ALL USERS ####
+* REQUEST
+```
+DELETE /api/v1/all-users
+```
+```json
+{
+  "key_admin": "keyadmin123"
 }
 ```
 * RESPONSE
