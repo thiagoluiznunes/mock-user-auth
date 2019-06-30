@@ -28,9 +28,7 @@ router.post('/users', asyncMiddleware(async (req, res) => {
   const response = await ctrl.postUser(name, email, password, imageUrl);
 
   if (!response.status) return resHandler(res, 401, 'User already registered');
-  const id = response;
-  const access_token = ctrl.createToken({ email, id });
-  res.status(200).json({ message: 'User registered with success', token: access_token });
+  res.status(200).json({ message: 'User registered with success', token: response.token });
 }));
 
 router.get('/users', asyncMiddleware(async (req, res) => {
@@ -41,9 +39,25 @@ router.get('/users', asyncMiddleware(async (req, res) => {
   res.status(200).json(response.data);
 }));
 
+router.patch('/users', asyncMiddleware(async (req, res) => {
+  const authorization = 'authorization';
+  let token = req.body.token || req.query.token || req.headers[authorization];
+  const response = await ctrl.updateUser(token, req.body);
+  if (!response.status) return resHandler(res, 403, 'Unauthorized');
+  res.status(200).json('User updated with success!');
+}));
+
 router.delete('/users', asyncMiddleware(async (req, res) => {
+  const authorization = 'authorization';
+  let token = req.body.token || req.query.token || req.headers[authorization];
+  const response = await ctrl.deleteUser(token, req.body);
+  if (!response.status) return resHandler(res, 403, 'Unauthorized');
+  res.status(200).json('User deleted with success!');
+}));
+
+router.delete('/all-users', asyncMiddleware(async (req, res) => {
   const { key_admin } = req.body;
-  if (key_admin === '123456') {
+  if (key_admin === 'keyadmin123') {
     ctrl.deleteUsers();
     resHandler(res, 200, 'Users deleted with success');
   } else {
