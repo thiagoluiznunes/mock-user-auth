@@ -10,7 +10,7 @@ function createToken(payload) {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
 
-const deleteUsers = async () => {
+const deleteAllUsers = async () => {
   userdb.users = [];
   await fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
   return true;
@@ -101,11 +101,35 @@ const updateUser = async (token, body) => {
   return { status: status };
 }
 
+const deleteUser = async (token) => {
+  let res_decode, status;
+  await jwt.verify(token, SECRET_KEY, (err, decode) => {
+    if (err) {
+      status = false;
+    }
+    else {
+      res_decode = decode;
+    }
+  });
+  if (res_decode) {
+    await userdb.users.findIndex((user, index) => {
+      if (user.email === res_decode.email && user.id === res_decode.id) {
+        userdb.users.splice(index, 1);
+        status = true;
+      }
+    });
+    console.log(userdb.users);
+    fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
+  }
+  return { status: status };
+}
+
 export default {
   createToken,
   isAuthenticated,
   postUser,
   getUser,
-  deleteUsers,
-  updateUser
+  updateUser,
+  deleteUser,
+  deleteAllUsers,
 }

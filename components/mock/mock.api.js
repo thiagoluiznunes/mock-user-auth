@@ -58,7 +58,7 @@ router.delete('/users', asyncMiddleware(async (req, res) => {
 router.delete('/all-users', asyncMiddleware(async (req, res) => {
   const { key_admin } = req.body;
   if (key_admin === 'keyadmin123') {
-    ctrl.deleteUsers();
+    ctrl.deleteAllUsers();
     resHandler(res, 200, 'Users deleted with success');
   } else {
     resHandler(res, 403, 'Unauthorized access');

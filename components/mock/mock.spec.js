@@ -43,9 +43,9 @@ describe('Mock Controller', () => {
         });
     });
   });
-  describe('DeleteUsers Function', () => {
+  describe('Delete All Users Function', () => {
     it('It should delete all users', () => {
-      mock.controller.deleteUsers()
+      mock.controller.deleteAllUsers()
         .then(res => {
           expect(res).to.equal(true);
         });
@@ -65,7 +65,7 @@ chai.use(chaiHttp);
 
 const userDeleteRequest = (key, code) => {
   chai.request(server)
-    .delete('/api/v1/users')
+    .delete('/api/v1/all-users')
     .send({ key_admin: key })
     .end((err, res) => {
       expect(res.status).to.equal(code);
@@ -107,7 +107,7 @@ const userGetRequest = (code, data) => {
 describe('Mock Api', () => {
   describe('/DELETE Users 200', () => {
     it('It should delete all users', () => {
-      userDeleteRequest('123456', 200);
+      userDeleteRequest('keyadmin123', 200);
     });
   });
   describe('/DELETE Users 403', () => {
@@ -128,7 +128,7 @@ describe('Mock Api', () => {
   });
   describe('/Auth User 200', () => {
     after(() => {
-      userDeleteRequest('123456', 200);
+      userDeleteRequest('keyadmin123', 200);
 
     });
     it('It should authenticate user', () => {
@@ -152,7 +152,7 @@ describe('Mock Api', () => {
         });
     });
     after(() => {
-      userDeleteRequest('123456', 200);
+      userDeleteRequest('keyadmin123', 200);
     });
     it('It should get a user by token', () => {
       userGetRequest(200, token);
