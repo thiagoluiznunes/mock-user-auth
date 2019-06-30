@@ -73,7 +73,7 @@
     "coverage"
   ],
   "bin": {
-    "mock-user-auth": "www.js"
+    "mock-user-auth": "install.sh"
   },
   "directories": {
     "test": "test"
