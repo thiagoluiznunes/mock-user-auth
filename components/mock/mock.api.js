@@ -1,18 +1,13 @@
 import express from 'express';
 import ctrl from './mock.controller';
+import helper from './mock.helper';
 const router = express.Router();
-
-const asyncMiddleware = fn =>
-  (req, res, next) => {
-    Promise.resolve(fn(req, res, next))
-      .catch(next);
-  };
 
 const resHandler = (res, code, message) => {
   res.status(code).json({ message: message });
 }
 
-router.post('/auth', asyncMiddleware(async (req, res) => {
+router.post('/auth', helper.asyncMiddleware(async (req, res) => {
   const { email, password } = req.body;
   const response = await ctrl.isAuthenticated(email, password);
 
@@ -22,7 +17,7 @@ router.post('/auth', asyncMiddleware(async (req, res) => {
   res.status(200).json({ token: access_token });
 }));
 
-router.post('/users', asyncMiddleware(async (req, res) => {
+router.post('/users', helper.asyncMiddleware(async (req, res) => {
   const { name, email, password } = req.body;
   const imageUrl = 'https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg';
   const response = await ctrl.postUser(name, email, password, imageUrl);
@@ -31,7 +26,7 @@ router.post('/users', asyncMiddleware(async (req, res) => {
   res.status(200).json({ message: 'User registered with success', token: response.token });
 }));
 
-router.get('/users', asyncMiddleware(async (req, res) => {
+router.get('/users', helper.asyncMiddleware(async (req, res) => {
   const authorization = 'authorization';
   let token = req.body.token || req.query.token || req.headers[authorization];
   const response = await ctrl.getUser(token);
@@ -39,7 +34,7 @@ router.get('/users', asyncMiddleware(async (req, res) => {
   res.status(200).json(response.data);
 }));
 
-router.patch('/users', asyncMiddleware(async (req, res) => {
+router.patch('/users', helper.asyncMiddleware(async (req, res) => {
   const authorization = 'authorization';
   let token = req.body.token || req.query.token || req.headers[authorization];
   const response = await ctrl.updateUser(token, req.body);
@@ -47,7 +42,7 @@ router.patch('/users', asyncMiddleware(async (req, res) => {
   res.status(200).json({ message: 'User updated with success!' });
 }));
 
-router.delete('/users', asyncMiddleware(async (req, res) => {
+router.delete('/users', helper.asyncMiddleware(async (req, res) => {
   const authorization = 'authorization';
   let token = req.body.token || req.query.token || req.headers[authorization];
   const response = await ctrl.deleteUser(token, req.body);
@@ -55,7 +50,7 @@ router.delete('/users', asyncMiddleware(async (req, res) => {
   res.status(200).json({ message: 'User deleted with success!' });
 }));
 
-router.delete('/all-users', asyncMiddleware(async (req, res) => {
+router.delete('/all-users', helper.asyncMiddleware(async (req, res) => {
   const { key_admin } = req.body;
   if (key_admin === 'keyadmin123') {
     ctrl.deleteAllUsers();
