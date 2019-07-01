@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/mock-user-auth.svg)](https://badge.fury.io/js/mock-user-auth)
 [![Build Status](https://travis-ci.org/thiagoluiznunes/mock-user-auth.svg?branch=master)](https://travis-ci.org/thiagoluiznunes/mock-user-auth)
-[![Maintainability](https://api.codeclimate.com/v1/badges/b60e5e0c37609f6b21c0/maintainability)](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/maintainability)
+<!-- [![Maintainability](https://api.codeclimate.com/v1/badges/b60e5e0c37609f6b21c0/maintainability)](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/maintainability) -->
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b60e5e0c37609f6b21c0/test_coverage)](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/test_coverage)
 [![Issue Count](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/badges/issue_count.svg)](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/issues)
 
