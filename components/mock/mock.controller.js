@@ -1,4 +1,4 @@
-import fs, { stat } from 'fs';
+import fs from 'fs';
 import faker from 'faker';
 import jwt from 'jsonwebtoken';
 
@@ -6,8 +6,22 @@ const SECRET_KEY = 'authsecret123';
 const expiresIn = '24h';
 const userdb = JSON.parse(fs.readFileSync(__dirname + '/users.json', 'UTF-8'));
 
-function createToken(payload) {
+const createToken = (payload) => {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
+}
+
+const verifyToken = async (token) => {
+  let data, status, res_decode;
+  await jwt.verify(token, SECRET_KEY, (err, decode) => {
+    if (err) {
+      data = err.message;
+      status = false;
+    }
+    else {
+      res_decode = decode;
+    }
+  });
+  return { data, status, res_decode };
 }
 
 const deleteAllUsers = async () => {
@@ -55,16 +69,7 @@ const postUser = async (name, email, password, imageUrl) => {
 }
 
 const getUser = async (token) => {
-  let data, res_decode, status;
-  await jwt.verify(token, SECRET_KEY, (err, decode) => {
-    if (err) {
-      data = err.message;
-      status = false;
-    }
-    else {
-      res_decode = decode;
-    }
-  });
+  let { data, res_decode, status } = await verifyToken(token);
   if (res_decode) {
     await userdb.users.findIndex(user => {
       if (user.email === res_decode.email && user.id === res_decode.id) {
@@ -77,15 +82,7 @@ const getUser = async (token) => {
 }
 
 const updateUser = async (token, body) => {
-  let res_decode, status;
-  await jwt.verify(token, SECRET_KEY, (err, decode) => {
-    if (err) {
-      status = false;
-    }
-    else {
-      res_decode = decode;
-    }
-  });
+  let { res_decode, status } = await verifyToken(token);
   if (res_decode) {
     await userdb.users.findIndex(user => {
       if (user.email === res_decode.email && user.id === res_decode.id) {
@@ -102,15 +99,7 @@ const updateUser = async (token, body) => {
 }
 
 const deleteUser = async (token) => {
-  let res_decode, status;
-  await jwt.verify(token, SECRET_KEY, (err, decode) => {
-    if (err) {
-      status = false;
-    }
-    else {
-      res_decode = decode;
-    }
-  });
+  let { res_decode, status } = await verifyToken(token);
   if (res_decode) {
     await userdb.users.findIndex((user, index) => {
       if (user.email === res_decode.email && user.id === res_decode.id) {
@@ -118,7 +107,6 @@ const deleteUser = async (token) => {
         status = true;
       }
     });
-    console.log(userdb.users);
     fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
   }
   return { status: status };
