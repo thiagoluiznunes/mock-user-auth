@@ -82,7 +82,7 @@ const getUser = async (token) => {
 }
 
 const updateUser = async (token, body) => {
-  let { res_decode, status } = await verifyToken(token);
+  let { data, res_decode, status } = await verifyToken(token);
   if (res_decode) {
     await userdb.users.findIndex(user => {
       if (user.email === res_decode.email && user.id === res_decode.id) {
@@ -90,12 +90,13 @@ const updateUser = async (token, body) => {
         user.email = body.email ? body.email : user.email;
         user.password = body.password ? body.password : user.password;
         user.imageUrl = body.imageUrl ? body.imageUrl : user.imageUrl;
+        data = user;
         status = true;
       }
     });
     fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
   }
-  return { status: status };
+  return { data: data, status: status };
 }
 
 const deleteUser = async (token) => {

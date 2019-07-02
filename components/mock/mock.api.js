@@ -7,6 +7,13 @@ const resHandler = (res, code, message) => {
   res.status(code).json({ message: message });
 }
 
+// const responseFactory = async (req, res, message) => {
+//   const token = await helper.retrieveRequestToken(req);
+//   const response = await ctrl.deleteUser(token, req.body);
+//   if (!response.status) return resHandler(res, 403, message.error);
+//   res.status(200).json({ message: message.error });
+// }
+
 router.post('/auth', helper.asyncMiddleware(async (req, res) => {
   const { email, password } = req.body;
   const response = await ctrl.isAuthenticated(email, password);
@@ -37,8 +44,8 @@ router.get('/users', helper.asyncMiddleware(async (req, res) => {
 router.patch('/users', helper.asyncMiddleware(async (req, res) => {
   const token = await helper.retrieveRequestToken(req);
   const response = await ctrl.updateUser(token, req.body);
-  if (!response.status) return resHandler(res, 403, 'Unauthorized to update');
-  res.status(200).json({ message: 'User updated with success!' });
+  if (!response.status) return resHandler(res, 403, response.data);
+  res.status(200).json({ data: response.data, message: 'User updated with success!' });
 }));
 
 router.delete('/users', helper.asyncMiddleware(async (req, res) => {

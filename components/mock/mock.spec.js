@@ -104,21 +104,19 @@ const userGetRequest = (code, data) => {
     });
 }
 
-const userPatchRequest = (code, token, body) => {
-  chai.request(server)
-    .patch('/api/v1/users')
-    .set('Authorization', token, body)
-    .end((err, res) => {
-      expect(res.status).to.equal(code);
-      expect(res.body).to.be.an('Object');
-      expect(res.body).to.be.not.empty;
-    });
-}
-
 const userDeleteRequest = (code, token) => {
   chai.request(server)
     .delete('/api/v1/users')
     .set('Authorization', token)
+    .end((err, res) => {
+      expect(res.status).to.equal(code);
+    });
+}
+
+const userPatchRequest = (code, token, body) => {
+  chai.request(server)
+    .patch('/api/v1/users')
+    .set('Authorization', token, body)
     .end((err, res) => {
       expect(res.status).to.equal(code);
       expect(res.body).to.be.an('Object');
