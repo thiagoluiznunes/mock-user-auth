@@ -37,14 +37,14 @@ router.get('/users', helper.asyncMiddleware(async (req, res) => {
 router.patch('/users', helper.asyncMiddleware(async (req, res) => {
   const token = await helper.retrieveRequestToken(req);
   const response = await ctrl.updateUser(token, req.body);
-  if (!response.status) return resHandler(res, 403, 'Unauthorized');
+  if (!response.status) return resHandler(res, 403, 'Unauthorized to update');
   res.status(200).json({ message: 'User updated with success!' });
 }));
 
 router.delete('/users', helper.asyncMiddleware(async (req, res) => {
   const token = await helper.retrieveRequestToken(req);
   const response = await ctrl.deleteUser(token, req.body);
-  if (!response.status) return resHandler(res, 403, 'Unauthorized');
+  if (!response.status) return resHandler(res, 403, 'Unauthorized to delete');
   res.status(200).json({ message: 'User deleted with success!' });
 }));
 

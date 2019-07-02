@@ -196,14 +196,11 @@ describe('Mock Api', () => {
   });
 
   describe('/PATCH User 200', () => {
-    let token;
-    before(async () => {
-      token = await retriveUserToken();
-    });
     after(() => {
       deleteAllUsersRequest('keyadmin123', 200);
     });
-    it('It should update a user by token', () => {
+    it('It should update a user by token', async () => {
+      const token = await retriveUserToken();
       userPatchRequest(200, token, { name: 'newTestName' });
     });
   });
@@ -214,14 +211,11 @@ describe('Mock Api', () => {
   });
 
   describe('/DELETE User 200', () => {
-    let token;
-    before(async () => {
-      token = await retriveUserToken();
-    });
     after(() => {
       deleteAllUsersRequest('keyadmin123', 200);
     });
-    it('It should update a user by token', () => {
+    it('It should update a user by token', async () => {
+      const token = await retriveUserToken();
       userDeleteRequest(200, token);
     });
   });
