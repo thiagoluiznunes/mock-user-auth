@@ -98,9 +98,9 @@ const userGetRequest = (code, data) => {
     .get('/api/v1/users')
     .set('Authorization', data)
     .end((err, res) => {
-      expect(res.status).to.equal(code);
       expect(res.body).to.be.an('Object');
       expect(res.body).to.be.not.empty;
+      expect(res.status).to.equal(code);
     });
 }
 
