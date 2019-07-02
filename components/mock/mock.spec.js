@@ -126,6 +126,21 @@ const userDeleteRequest = (code, token) => {
     });
 }
 
+const retriveUserToken = async () => {
+  let token;
+  await userPostRequest(200, 'User registered with success');
+  await chai.request(server)
+    .post('/api/v1/auth')
+    .send(user)
+    .then((res) => {
+      token = res.body.token;
+    })
+    .catch((err) => {
+      throw err;
+    });
+  return token;
+}
+
 describe('Mock Api', () => {
   describe('/DELETE Users 200', () => {
     it('It should delete all users', () => {
@@ -164,14 +179,8 @@ describe('Mock Api', () => {
   });
   describe('/GET User 200', () => {
     let token;
-    before(() => {
-      userPostRequest(200, 'User registered with success');
-      chai.request(server)
-        .post('/api/v1/auth')
-        .send(user)
-        .end((err, res) => {
-          token = res.body.token;
-        });
+    before(async () => {
+      token = await retriveUserToken();
     });
     after(() => {
       deleteAllUsersRequest('keyadmin123', 200);
@@ -188,14 +197,8 @@ describe('Mock Api', () => {
 
   describe('/PATCH User 200', () => {
     let token;
-    before(() => {
-      userPostRequest(200, 'User registered with success');
-      chai.request(server)
-        .post('/api/v1/auth')
-        .send(user)
-        .end((err, res) => {
-          token = res.body.token;
-        });
+    before(async () => {
+      token = await retriveUserToken();
     });
     after(() => {
       deleteAllUsersRequest('keyadmin123', 200);
@@ -212,14 +215,8 @@ describe('Mock Api', () => {
 
   describe('/DELETE User 200', () => {
     let token;
-    before(() => {
-      userPostRequest(200, 'User registered with success');
-      chai.request(server)
-        .post('/api/v1/auth')
-        .send(user)
-        .end((err, res) => {
-          token = res.body.token;
-        });
+    before(async () => {
+      token = await retriveUserToken();
     });
     after(() => {
       deleteAllUsersRequest('keyadmin123', 200);
