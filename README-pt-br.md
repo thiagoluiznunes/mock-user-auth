@@ -1,5 +1,6 @@
 # mock-user-auth
 
+![npm](https://img.shields.io/npm/dt/mock-user-auth.svg)
 [![npm version](https://badge.fury.io/js/mock-user-auth.svg)](https://badge.fury.io/js/mock-user-auth)
 [![Build Status](https://travis-ci.org/thiagoluiznunes/mock-user-auth.svg?branch=master)](https://travis-ci.org/thiagoluiznunes/mock-user-auth)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b60e5e0c37609f6b21c0/maintainability)](https://codeclimate.com/github/thiagoluiznunes/mock-json-server/maintainability)
